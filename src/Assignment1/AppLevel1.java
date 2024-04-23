@@ -52,27 +52,24 @@ public class AppLevel1 {
     // 계산결과값을 저장하는 함수
     public static void storeResult(long result){
 
-        if (errorMessage.isEmpty()){
-            System.out.println("결과: " + result);
-
-            // Level1 요구사항6 : 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장될 수 있도록 소스 코드를 수정합니다.
-            if (resultArrayIndex == 10){
-                for(int i = 0; i < resultArray.length - 1; i++){
-                    resultArray[i] = resultArray[i + 1];
-                }
-                resultArray[resultArrayIndex - 1] = result;
+        // Level1 요구사항6 : 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장될 수 있도록 소스 코드를 수정합니다.
+        if (resultArrayIndex == 10){
+            for(int i = 0; i < resultArray.length - 1; i++){
+                resultArray[i] = resultArray[i + 1];
             }
-            else{
-                resultArray[resultArrayIndex] = result;
-                resultList.add(result);
-                resultArrayIndex++;
-            }
+            resultArray[resultArrayIndex - 1] = result;
+        }
+        else{
+            resultArray[resultArrayIndex] = result;
+            resultList.add(result);
+            resultArrayIndex++;
         }
 
     }
 
     // 배열과 리스트에 들은 값을 출력하는 함수
     public static void printArrayList(){
+
         String command;
         System.out.print("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회) : ");
         command = sc.nextLine();
@@ -94,6 +91,7 @@ public class AppLevel1 {
 
     // 각 배열과 리스트의 첫 요소를 제거하는 함수
     public static void removeFirstResult(){
+
         String command;
         System.out.print("가장 먼저 저장된 연산 결과를 삭제하겠습니까? (remove 입력 시 삭제): ");
 
@@ -139,6 +137,11 @@ public class AppLevel1 {
 
             // Level1 요구사항3 : 입력받은 양의 정수 2개와 사칙연산 기호를 사용하여 연산을 진행한 후 결과값을 출력합니다.
             result = calculate(firstNumber, secondNumber, operation);
+
+            if (errorMessage.isEmpty()) {
+                System.out.println("결과: " + result);
+            }
+
             storeResult(result);
             printArrayList();
             removeFirstResult();
